@@ -2,8 +2,10 @@ package courses.employees.domain.employees;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@Getter
 public class Employee {
 
     private Long id;
