@@ -2,6 +2,7 @@ package courses.courses.domain.enrollments;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class Course {
 
     private final CourseCode code;
