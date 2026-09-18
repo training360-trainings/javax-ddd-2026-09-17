@@ -16,18 +16,18 @@ public class CourseRepository implements CourseRepositoryPort {
 
     @Override
     public Course save(Course course) {
-        courseCrudRepository.save(new CourseEntity(course.getCode().value(), course.getTitle(), course.getLimit()));
+        courseCrudRepository.save(new CourseEntity(null, course.getCode().value(), course.getTitle(), course.getLimit()));
         return course;
     }
 
     @Override
     public boolean existsWithCode(CourseCode code) {
-        return courseCrudRepository.existsById(code.value());
+        return courseCrudRepository.existsByCode(code.value());
     }
 
     @Override
     public Optional<Course> findByCode(CourseCode code) {
-        return courseCrudRepository.findById(code.value()).map(
+        return courseCrudRepository.findByCode(code.value()).map(
                 entity -> new Course(new CourseCode(entity.code()), entity.title(), entity.limit())
         );
     }
