@@ -23,4 +23,10 @@ public class EmployeeQueryService implements EmployeeQueryServicePort {
     public boolean exists(long employeeId) {
         return employeeRepositoryPort.exists(employeeId);
     }
+
+    @Override
+    public EmployeeDto findById(long employeeId) {
+        return employeeRepositoryPort.findById(employeeId)
+                .orElseThrow(() -> new IllegalArgumentException("Employee with id %d does not exist".formatted(employeeId)));
+    }
 }

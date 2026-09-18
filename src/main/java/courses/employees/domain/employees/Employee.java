@@ -1,8 +1,9 @@
 package courses.employees.domain.employees;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.util.Objects;
 
 @AllArgsConstructor
 @Getter
@@ -13,9 +14,7 @@ public class Employee {
     private String name;
 
     public static Employee join(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Name of the employee cannot be null");
-        }
+        Objects.requireNonNull(name, "Employee name cannot be null");
         return new Employee(null, name);
     }
 }

@@ -27,6 +27,11 @@ public class EmployeeController {
         return employeeQueryServicePort.findAll();
     }
 
+    @GetMapping("/{employeeId}")
+    public EmployeeDto findById(@PathVariable long employeeId) {
+        return employeeQueryServicePort.findById(employeeId);
+    }
+
     @DeleteMapping("/{employeeId}")
     public void leave(@PathVariable long employeeId) {
         employeeApplicationServicePort.leave(new LeaveCommand(employeeId));

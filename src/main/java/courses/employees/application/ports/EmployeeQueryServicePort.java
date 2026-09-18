@@ -7,4 +7,6 @@ public interface EmployeeQueryServicePort {
     List<EmployeeDto> findAll();
 
     boolean exists(long employeeId);
+
+    EmployeeDto findById(long employeeId);
 }

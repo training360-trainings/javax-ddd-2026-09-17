@@ -9,6 +9,9 @@ Content-Type: application/json
 ### List employees
 GET http://localhost:8080/api/employees
 
+### Find employee by id
+GET http://localhost:8080/api/employees/11
+
 ### Announce course
 POST http://localhost:8080/api/courses
 Content-Type: application/json
