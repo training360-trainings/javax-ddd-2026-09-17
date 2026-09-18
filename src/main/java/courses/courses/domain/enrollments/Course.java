@@ -17,7 +17,7 @@ public class Course {
 
     private int limit;
 
-    private final Set<Enrollment> enrollments = new HashSet<>();
+    private Set<Enrollment> enrollments;
 
     private final List<DomainEntityEvent> events = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class Course {
         if (limit <= 0) {
             throw new IllegalArgumentException("Limit must be greater than 0");
         }
-        var course = new Course(code, title, limit);
+        var course = new Course(code, title, limit, new HashSet<>());
         course.events.add(new CourseHasBeenAnnounced(code, title, limit));
         return course;
     }

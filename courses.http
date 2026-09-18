@@ -14,21 +14,21 @@ POST http://localhost:8080/api/courses
 Content-Type: application/json
 
 {
-  "code": "JAVAX-DDD",
+  "code": "JAVAX-DDD4",
   "title": "Data Driven Design",
-  "limit": 7
+  "limit": 1
 }
 
 ### List courses
 GET http://localhost:8080/api/courses
 
 ### Enroll
-POST http://localhost:8080/api/courses/JAVAX-DDD/enrollments
+POST http://localhost:8080/api/courses/JAVAX-DDD4/enrollments
 Content-Type: application/json
 
 {
-  "employeeId": 1,
-  "courseCode": "JAVAX-DDD"
+  "employeeId": 2,
+  "courseCode": "JAVAX-DDD4"
 }
 
 

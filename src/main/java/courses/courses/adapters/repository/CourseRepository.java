@@ -2,15 +2,13 @@ package courses.courses.adapters.repository;
 
 import courses.courses.application.ports.CourseDto;
 import courses.courses.application.ports.CourseRepositoryPort;
-import courses.courses.domain.enrollments.Course;
-import courses.courses.domain.enrollments.CourseCode;
-import courses.courses.domain.enrollments.CourseHasBeenAnnounced;
-import courses.courses.domain.enrollments.EmployeeHasBeenEnrolled;
+import courses.courses.domain.enrollments.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -44,9 +42,19 @@ public class CourseRepository implements CourseRepositoryPort {
 
     @Override
     public Optional<Course> findByCode(CourseCode code) {
-        return courseCrudRepository.findByCode(code.value()).map(
-                entity -> new Course(new CourseCode(entity.code()), entity.title(), entity.limit())
-        );
+        var optional = courseCrudRepository.findByCode(code.value());
+        if (optional.isPresent()) {
+            var entity = optional.get();
+            var enrollments = enrollmentCrudRepository.findByCourseId(entity.id())
+                    .stream().map(enrollmentEntity ->
+                            new Enrollment(new EmployeeId(enrollmentEntity.employeeId()), null))
+                    .collect(Collectors.toSet());
+            var course = new Course(new CourseCode(entity.code()), entity.title(), entity.limit(), enrollments);
+            return Optional.of(course);
+        }
+        else {
+            return Optional.empty();
+        }
     }
 
     @Override
