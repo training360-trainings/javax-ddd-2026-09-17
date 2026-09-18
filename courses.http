@@ -8,3 +8,14 @@ Content-Type: application/json
 
 ### List employees
 GET http://localhost:8080/api/employees
+
+### Announce course
+POST http://localhost:8080/api/courses
+Content-Type: application/json
+
+{
+  "code": "JAVAX-DDD",
+  "title": "Data Driven Design",
+  "limit": 7
+}
+
