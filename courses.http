@@ -22,3 +22,13 @@ Content-Type: application/json
 ### List courses
 GET http://localhost:8080/api/courses
 
+### Enroll
+POST http://localhost:8080/api/courses/JAVAX-DDD/enrollments
+Content-Type: application/json
+
+{
+  "employeeId": 1,
+  "courseCode": "JAVAX-DDD"
+}
+
+

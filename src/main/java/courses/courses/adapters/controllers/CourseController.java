@@ -1,9 +1,6 @@
 package courses.courses.adapters.controllers;
 
-import courses.courses.application.ports.AnnounceCommand;
-import courses.courses.application.ports.CourseApplicationServicePort;
-import courses.courses.application.ports.CourseDto;
-import courses.courses.application.ports.CourseQueryServicePort;
+import courses.courses.application.ports.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,4 +26,14 @@ public class CourseController {
     public List<CourseDto> findAll() {
         return courseQueryServicePort.findAll();
     }
+
+    @PostMapping("/{courseCode}/enrollments")
+    public void enroll(@PathVariable String courseCode, @RequestBody EnrollCommand enrollCommand) {
+        if (!courseCode.equals(enrollCommand.courseCode())) {
+            throw new IllegalArgumentException("Incorrect course codes: %s != %s"
+                    .formatted(courseCode, enrollCommand.courseCode()));
+        }
+        courseApplicationServicePort.enroll(enrollCommand);
+    }
+
 }

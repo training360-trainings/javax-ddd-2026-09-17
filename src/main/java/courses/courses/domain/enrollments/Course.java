@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @AllArgsConstructor
 @Getter
@@ -21,6 +19,8 @@ public class Course {
 
     private final Set<Enrollment> enrollments = new HashSet<>();
 
+    private final List<DomainEntityEvent> events = new ArrayList<>();
+
     public static Course announce(CourseCode code, String title, int limit) {
         Objects.requireNonNull(code, "Course code must not be null");
         if (title == null || title.isBlank()) {
@@ -29,7 +29,9 @@ public class Course {
         if (limit <= 0) {
             throw new IllegalArgumentException("Limit must be greater than 0");
         }
-        return new Course(code, title, limit);
+        var course = new Course(code, title, limit);
+        course.events.add(new CourseHasBeenAnnounced(code, title, limit));
+        return course;
     }
 
     public void enroll(EmployeeId employeeId) {
@@ -42,5 +44,6 @@ public class Course {
         }
         var enrollment = new Enrollment(employeeId, LocalDateTime.now());
         enrollments.add(enrollment);
+        events.add(new EmployeeHasBeenEnrolled(employeeId, code));
     }
 }

@@ -4,6 +4,8 @@ import courses.courses.application.ports.CourseDto;
 import courses.courses.application.ports.CourseRepositoryPort;
 import courses.courses.domain.enrollments.Course;
 import courses.courses.domain.enrollments.CourseCode;
+import courses.courses.domain.enrollments.CourseHasBeenAnnounced;
+import courses.courses.domain.enrollments.EmployeeHasBeenEnrolled;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -16,9 +18,22 @@ public class CourseRepository implements CourseRepositoryPort {
 
     private final CourseCrudRepository courseCrudRepository;
 
+    private final EnrollmentCrudRepository enrollmentCrudRepository;
+
     @Override
     public Course save(Course course) {
-        courseCrudRepository.save(new CourseEntity(null, course.getCode().value(), course.getTitle(), course.getLimit()));
+        // Data Oriented Programming
+        for (var event: course.getEvents()) {
+            switch (event) {
+                case CourseHasBeenAnnounced(var code, var title, var limit)
+                        -> courseCrudRepository.save(new CourseEntity(null, code.value(), title, limit));
+                case EmployeeHasBeenEnrolled(var employeeId, var code) -> {
+                        var entity = courseCrudRepository.findByCode(code.value());
+                        enrollmentCrudRepository.save(new EnrollmentEntity(null, employeeId.id(),
+                                entity.orElseThrow().id()));
+                }
+            }
+        }
         return course;
     }
 

@@ -14,5 +14,5 @@ create table if not exists enrollment_entity
 (
     id serial primary key,
     employee_id bigint references employee_entity(id),
-    course_code bigint references course_entity(id)
+    course_id bigint references course_entity(id)
 );
