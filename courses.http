@@ -5,3 +5,6 @@ Content-Type: application/json
 {
   "employeeName": "John Doe"
 }
+
+### List employees
+GET http://localhost:8080/api/employees
