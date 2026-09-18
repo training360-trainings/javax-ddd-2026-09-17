@@ -19,3 +19,6 @@ Content-Type: application/json
   "limit": 7
 }
 
+### List courses
+GET http://localhost:8080/api/courses
+
