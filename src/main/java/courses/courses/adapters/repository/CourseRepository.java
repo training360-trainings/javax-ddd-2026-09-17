@@ -30,6 +30,9 @@ public class CourseRepository implements CourseRepositoryPort {
                         enrollmentCrudRepository.save(new EnrollmentEntity(null, employeeId.id(),
                                 entity.orElseThrow().id()));
                 }
+                case EmployeeHasBeenLeaved(var employeeId) -> {
+                    // TODO delete
+                }
             }
         }
         return course;
@@ -60,5 +63,10 @@ public class CourseRepository implements CourseRepositoryPort {
     @Override
     public List<CourseDto> findAll() {
         return courseCrudRepository.findAllDto();
+    }
+
+    @Override
+    public List<Course> findEnrollmentExist(long l) {
+        return List.of();
     }
 }

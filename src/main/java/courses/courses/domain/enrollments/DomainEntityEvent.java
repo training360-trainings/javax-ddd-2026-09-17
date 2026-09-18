@@ -1,4 +1,5 @@
 package courses.courses.domain.enrollments;
 
-public sealed interface DomainEntityEvent permits CourseHasBeenAnnounced, EmployeeHasBeenEnrolled {
+public sealed interface DomainEntityEvent permits CourseHasBeenAnnounced, EmployeeHasBeenEnrolled,
+    EmployeeHasBeenLeaved {
 }

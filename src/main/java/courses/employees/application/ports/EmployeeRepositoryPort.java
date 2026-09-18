@@ -11,4 +11,6 @@ public interface EmployeeRepositoryPort {
     List<EmployeeDto> findAll();
 
     boolean exists(long employeeId);
+
+    void delete(long l);
 }

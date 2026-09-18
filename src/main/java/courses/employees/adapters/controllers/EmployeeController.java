@@ -1,9 +1,6 @@
 package courses.employees.adapters.controllers;
 
-import courses.employees.application.ports.EmployeeApplicationServicePort;
-import courses.employees.application.ports.EmployeeDto;
-import courses.employees.application.ports.EmployeeQueryServicePort;
-import courses.employees.application.ports.JoinCommand;
+import courses.employees.application.ports.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +25,10 @@ public class EmployeeController {
     @GetMapping
     public List<EmployeeDto> findAll() {
         return employeeQueryServicePort.findAll();
+    }
+
+    @DeleteMapping("/{employeeId}")
+    public void leave(@PathVariable long employeeId) {
+        employeeApplicationServicePort.leave(new LeaveCommand(employeeId));
     }
 }

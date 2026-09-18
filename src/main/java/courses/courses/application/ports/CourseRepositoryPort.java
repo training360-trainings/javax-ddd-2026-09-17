@@ -15,4 +15,6 @@ public interface CourseRepositoryPort {
     Optional<Course> findByCode(CourseCode code);
 
     List<CourseDto> findAll();
+
+    List<Course> findEnrollmentExist(long l);
 }

@@ -33,4 +33,9 @@ public class EmployeeRepository implements EmployeeRepositoryPort {
     public boolean exists(long employeeId) {
         return employeeCrudRepository.existsById(employeeId);
     }
+
+    @Override
+    public void delete(long id) {
+        employeeCrudRepository.deleteById(id);
+    }
 }
