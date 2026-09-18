@@ -18,4 +18,9 @@ public class EmployeeQueryService implements EmployeeQueryServicePort {
     public List<EmployeeDto> findAll() {
         return employeeRepositoryPort.findAll();
     }
+
+    @Override
+    public boolean exists(long employeeId) {
+        return employeeRepositoryPort.exists(employeeId);
+    }
 }

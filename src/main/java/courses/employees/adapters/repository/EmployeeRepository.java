@@ -28,4 +28,9 @@ public class EmployeeRepository implements EmployeeRepositoryPort {
     public List<EmployeeDto> findAll() {
         return employeeCrudRepository.findAllEmployeeDto();
     }
+
+    @Override
+    public boolean exists(long employeeId) {
+        return employeeCrudRepository.existsById(employeeId);
+    }
 }

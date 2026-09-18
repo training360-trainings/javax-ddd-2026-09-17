@@ -9,4 +9,6 @@ public interface EmployeeRepositoryPort {
     Employee save(Employee employee);
 
     List<EmployeeDto> findAll();
+
+    boolean exists(long employeeId);
 }
