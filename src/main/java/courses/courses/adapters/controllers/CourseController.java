@@ -36,4 +36,9 @@ public class CourseController {
         courseApplicationServicePort.enroll(enrollCommand);
     }
 
+    @GetMapping("/{courseCode}/enrollments")
+    public List<EnrollmentDto> findEnrollmentByCourseCode(@PathVariable String courseCode) {
+        return courseQueryServicePort.findEnrollmentByCourseCode(courseCode);
+    }
+
 }

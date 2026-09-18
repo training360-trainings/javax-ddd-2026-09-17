@@ -13,9 +13,10 @@ public class LeaveUseCase {
     private final CourseRepository courseRepository;
 
     public void leave(LeaveCommand leaveCommand) {
-        var courses = courseRepository.findEnrollmentExist(leaveCommand.employeeId());
+        var employeeId = new EmployeeId(leaveCommand.employeeId());
+        var courses = courseRepository.findEnrollmentExist(employeeId);
         for (var course: courses) {
-            course.leave(new EmployeeId(leaveCommand.employeeId()));
+            course.leave(employeeId);
             courseRepository.save(course);
         }
     }

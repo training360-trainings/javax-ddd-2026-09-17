@@ -1,4 +1,4 @@
 package courses.courses.domain.enrollments;
 
-public record EmployeeHasBeenLeaved(EmployeeId employeeId) implements DomainEntityEvent {
+public record EmployeeHasBeenLeaved(EmployeeId employeeId, CourseCode courseCode) implements DomainEntityEvent {
 }

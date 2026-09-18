@@ -49,6 +49,6 @@ public class Course {
 
     public void leave(EmployeeId id) {
         enrollments.removeIf(enrollment -> enrollment.employeeId().equals(id));
-        events.add(new EmployeeHasBeenLeaved(id));
+        events.add(new EmployeeHasBeenLeaved(id, code));
     }
 }

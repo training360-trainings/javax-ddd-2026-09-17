@@ -2,6 +2,7 @@ package courses.courses.adapters.repository;
 
 import courses.courses.application.ports.CourseDto;
 import courses.courses.application.ports.CourseRepositoryPort;
+import courses.courses.application.ports.EnrollmentDto;
 import courses.courses.domain.enrollments.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -30,8 +31,8 @@ public class CourseRepository implements CourseRepositoryPort {
                         enrollmentCrudRepository.save(new EnrollmentEntity(null, employeeId.id(),
                                 entity.orElseThrow().id()));
                 }
-                case EmployeeHasBeenLeaved(var employeeId) -> {
-                    // TODO delete
+                case EmployeeHasBeenLeaved(var employeeId, var courseCode) -> {
+                    enrollmentCrudRepository.deleteByCourseCodeAndEmployeeId(employeeId.id(), courseCode.value());
                 }
             }
         }
@@ -66,7 +67,15 @@ public class CourseRepository implements CourseRepositoryPort {
     }
 
     @Override
-    public List<Course> findEnrollmentExist(long l) {
-        return List.of();
+    public List<Course> findEnrollmentExist(EmployeeId employeeId) {
+        return enrollmentCrudRepository.findCodeByEmployeeId(employeeId.id())
+                .stream()
+                .flatMap(code -> findByCode(new CourseCode(code)).stream())
+                .toList();
+    }
+
+    @Override
+    public List<EnrollmentDto> findEnrollmentByCourseCode(String courseCode) {
+        return enrollmentCrudRepository.findAllByCourseCode(courseCode);
     }
 }

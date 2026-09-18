@@ -2,6 +2,7 @@ package courses.courses.application.ports;
 
 import courses.courses.domain.enrollments.Course;
 import courses.courses.domain.enrollments.CourseCode;
+import courses.courses.domain.enrollments.EmployeeId;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,5 +17,7 @@ public interface CourseRepositoryPort {
 
     List<CourseDto> findAll();
 
-    List<Course> findEnrollmentExist(long l);
+    List<Course> findEnrollmentExist(EmployeeId employeeId);
+
+    List<EnrollmentDto> findEnrollmentByCourseCode(String courseCode);
 }
