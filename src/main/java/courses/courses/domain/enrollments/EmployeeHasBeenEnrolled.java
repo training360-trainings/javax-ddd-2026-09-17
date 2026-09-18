@@ -1,6 +1,8 @@
 package courses.courses.domain.enrollments;
 
-public record EmployeeHasBeenEnrolled(EmployeeId employeeId, CourseCode code)
+import java.time.LocalDateTime;
+
+public record EmployeeHasBeenEnrolled(EmployeeId employeeId, CourseCode code, LocalDateTime enrolledAt)
     implements DomainEntityEvent
 {
 }

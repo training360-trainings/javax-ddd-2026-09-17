@@ -26,10 +26,10 @@ public class CourseRepository implements CourseRepositoryPort {
             switch (event) {
                 case CourseHasBeenAnnounced(var code, var title, var limit)
                         -> courseCrudRepository.save(new CourseEntity(null, code.value(), title, limit));
-                case EmployeeHasBeenEnrolled(var employeeId, var code) -> {
+                case EmployeeHasBeenEnrolled(var employeeId, var code, var enrolledAt) -> {
                         var entity = courseCrudRepository.findByCode(code.value());
                         enrollmentCrudRepository.save(new EnrollmentEntity(null, employeeId.id(),
-                                entity.orElseThrow().id()));
+                                entity.orElseThrow().id(), enrolledAt));
                 }
                 case EmployeeHasBeenLeaved(var employeeId, var courseCode) -> {
                     enrollmentCrudRepository.deleteByCourseCodeAndEmployeeId(employeeId.id(), courseCode.value());

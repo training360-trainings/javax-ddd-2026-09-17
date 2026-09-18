@@ -14,5 +14,6 @@ create table if not exists enrollment_entity
 (
     id serial primary key,
     employee_id bigint, -- nem szabad külső kulcsot tenni másik modulra
-    course_id bigint references course_entity(id)
+    course_id bigint references course_entity(id),
+    enrolled_at timestamp
 );

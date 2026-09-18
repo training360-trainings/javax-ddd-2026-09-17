@@ -17,6 +17,6 @@ public interface EnrollmentCrudRepository extends ListCrudRepository<EnrollmentE
     @Query("select code from course_entity c join enrollment_entity e on c.id = e.course_id where e.employee_id = :employeeId")
     List<String> findCodeByEmployeeId(Long employeeId);
 
-    @Query("select employee_id from enrollment_entity e join course_entity c on e.course_id = c.id where c.code = :courseCode")
+    @Query("select employee_id, enrolled_at from enrollment_entity e join course_entity c on e.course_id = c.id where c.code = :courseCode")
     List<EnrollmentDto> findAllByCourseCode(String courseCode);
 }

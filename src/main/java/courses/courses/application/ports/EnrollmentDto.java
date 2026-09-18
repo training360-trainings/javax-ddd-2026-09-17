@@ -1,4 +1,6 @@
 package courses.courses.application.ports;
 
-public record EnrollmentDto(long employeeId) {
+import java.time.LocalDateTime;
+
+public record EnrollmentDto(long employeeId, LocalDateTime enrolledAt) {
 }

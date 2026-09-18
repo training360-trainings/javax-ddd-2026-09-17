@@ -27,9 +27,12 @@ POST http://localhost:8080/api/courses/JAVAX-DDD/enrollments
 Content-Type: application/json
 
 {
-  "employeeId": 2,
+  "employeeId": 11,
   "courseCode": "JAVAX-DDD"
 }
 
 ### Leave
 DELETE http://localhost:8080/api/employees/1
+
+### Enrollments
+GET http://localhost:8080/api/courses/JAVAX-DDD/enrollments

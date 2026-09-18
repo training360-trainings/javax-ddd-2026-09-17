@@ -4,7 +4,7 @@ public interface CourseApplicationServicePort {
 
     CourseDto announce(AnnounceCommand announceCommand);
 
-    void enroll(EnrollCommand enrollCommand);
+    EnrollmentDto enroll(EnrollCommand enrollCommand);
 
     void leave(LeaveCommand leaveCommand);
 }

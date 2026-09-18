@@ -28,8 +28,8 @@ public class CourseApplicationService implements CourseApplicationServicePort {
     }
 
     @Override
-    public void enroll(EnrollCommand enrollCommand) {
-        enrollUseCase.enroll(enrollCommand);
+    public EnrollmentDto enroll(EnrollCommand enrollCommand) {
+        return enrollUseCase.enroll(enrollCommand);
     }
 
     @Override

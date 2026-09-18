@@ -34,17 +34,20 @@ public class Course {
         return course;
     }
 
-    public void enroll(EmployeeId employeeId) {
+    public Enrollment enroll(EmployeeId employeeId) {
         Objects.requireNonNull(employeeId, "Employee Id cannot be null");
-        if (enrollments.stream().anyMatch(enrollment -> enrollment.employeeId().equals(employeeId))) {
-            return;
+        var found = enrollments.stream().filter(enrollment -> enrollment.employeeId().equals(employeeId)).findAny();
+        if (found.isPresent()) {
+            return found.get();
         }
         if (limit == enrollments.size()) {
             throw new IllegalStateException("There is no more enrollments in this course %s".formatted(code.value()));
         }
-        var enrollment = new Enrollment(employeeId, LocalDateTime.now());
+        var now  = LocalDateTime.now();
+        var enrollment = new Enrollment(employeeId, now);
         enrollments.add(enrollment);
-        events.add(new EmployeeHasBeenEnrolled(employeeId, code));
+        events.add(new EmployeeHasBeenEnrolled(employeeId, code, now));
+        return enrollment;
     }
 
     public void leave(EmployeeId id) {

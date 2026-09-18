@@ -28,12 +28,12 @@ public class CourseController {
     }
 
     @PostMapping("/{courseCode}/enrollments")
-    public void enroll(@PathVariable String courseCode, @RequestBody EnrollCommand enrollCommand) {
+    public EnrollmentDto enroll(@PathVariable String courseCode, @RequestBody EnrollCommand enrollCommand) {
         if (!courseCode.equals(enrollCommand.courseCode())) {
             throw new IllegalArgumentException("Incorrect course codes: %s != %s"
                     .formatted(courseCode, enrollCommand.courseCode()));
         }
-        courseApplicationServicePort.enroll(enrollCommand);
+        return courseApplicationServicePort.enroll(enrollCommand);
     }
 
     @GetMapping("/{courseCode}/enrollments")
